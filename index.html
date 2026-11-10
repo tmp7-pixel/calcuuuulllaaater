@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SarcasmoCalc 9000™ - The World's Most Condescending Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;800;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="grid-overlay"></div>
+
+  <!-- Audio elements via Web Audio API synth in script.js -->
+
+  <main class="calculator-container" id="calculatorApp">
+    <!-- Header ribbon -->
+    <header class="calc-header">
+      <div class="brand">
+        <span class="icon-pulse">⚡</span>
+        <div class="brand-text">
+          <span class="brand-title">SARCASMO<span class="highlight">CALC</span></span>
+          <span class="brand-badge">PRO WRONG v9.4</span>
+        </div>
+      </div>
+      <div class="header-status">
+        <div class="status-indicator">
+          <span class="blink-dot"></span>
+          <span class="status-text" id="statusText">JUDGING YOU</span>
+        </div>
+        <button id="soundToggle" class="sound-btn" title="Toggle Annoying Sounds">🔊</button>
+      </div>
+    </header>
+
+    <!-- Display screen with CRT scanlines & glass reflection -->
+    <section class="display-wrapper" id="displayBox">
+      <div class="crt-scanline"></div>
+      <div class="glass-reflection"></div>
+      
+      <div class="snarky-whisper" id="snarkyWhisper">
+        <span class="agent-avatar">🤖</span>
+        <span class="whisper-text" id="whisperText">“Go ahead, ask something basic...”</span>
+      </div>
+
+      <div class="expression-line" id="expressionDisplay">0</div>
+      
+      <div class="main-result" id="mainDisplay">0</div>
+
+      <div class="roast-banner" id="roastBanner">
+        <span class="roast-badge">CERTIFIED WRONG™</span>
+        <span class="roast-message" id="roastText">Ready to disappoint you.</span>
+      </div>
+    </section>
+
+    <!-- IQ Meter / Attitude Gauge -->
+    <div class="attitude-meter">
+      <div class="meter-info">
+        <span>ESTIMATED USER IQ:</span>
+        <span id="iqValue" class="iq-counter">72 (Dropping)</span>
+      </div>
+      <div class="meter-bar-track">
+        <div class="meter-bar-fill" id="meterFill" style="width: 28%;"></div>
+      </div>
+    </div>
+
+    <!-- Keypad Matrix -->
+    <section class="keypad-matrix">
+      <!-- Row 1 -->
+      <button class="key key-func" data-action="clear" title="Erase your dignity">
+        <span class="key-label">AC</span>
+        <span class="key-sub">Surrender</span>
+      </button>
+      <button class="key key-func" data-action="backspace" title="Regret your choices">
+        <span class="key-label">⌫</span>
+        <span class="key-sub">Undo</span>
+      </button>
+      <button class="key key-func" data-action="random-insult" title="Skip straight to emotional damage">
+        <span class="key-label">🔥</span>
+        <span class="key-sub">Roast Me</span>
+      </button>
+      <button class="key key-op" data-key="/" title="Divide by something, see if I care">
+        <span class="key-label">÷</span>
+        <span class="key-sub">split</span>
+      </button>
+
+      <!-- Row 2 -->
+      <button class="key key-num" data-key="7">
+        <span class="key-label">7</span>
+      </button>
+      <button class="key key-num" data-key="8">
+        <span class="key-label">8</span>
+      </button>
+      <button class="key key-num" data-key="9">
+        <span class="key-label">9</span>
+      </button>
+      <button class="key key-op" data-key="*" title="Multiply your problems">
+        <span class="key-label">×</span>
+        <span class="key-sub">cloning</span>
+      </button>
+
+      <!-- Row 3 -->
+      <button class="key key-num" data-key="4">
+        <span class="key-label">4</span>
+      </button>
+      <button class="key key-num" data-key="5">
+        <span class="key-label">5</span>
+      </button>
+      <button class="key key-num" data-key="6">
+        <span class="key-label">6</span>
+      </button>
+      <button class="key key-op" data-key="-" title="Deduct common sense">
+        <span class="key-label">−</span>
+        <span class="key-sub">lose</span>
+      </button>
+
+      <!-- Row 4 -->
+      <button class="key key-num" data-key="1">
+        <span class="key-label">1</span>
+      </button>
+      <button class="key key-num" data-key="2">
+        <span class="key-label">2</span>
+      </button>
+      <button class="key key-num" data-key="3">
+        <span class="key-label">3</span>
+      </button>
+      <button class="key key-op" data-key="+" title="Add needless complexity">
+        <span class="key-label">+</span>
+        <span class="key-sub">hoard</span>
+      </button>
+
+      <!-- Row 5 -->
+      <button class="key key-num key-zero" data-key="0">
+        <span class="key-label">0</span>
+        <span class="key-sub">your bank balance</span>
+      </button>
+      <button class="key key-num" data-key=".">
+        <span class="key-label">.</span>
+        <span class="key-sub">dot</span>
+      </button>
+      <button class="key key-equals" data-action="calculate" id="equalBtn">
+        <span class="key-label">=</span>
+        <span class="key-sub">Deliver Lies</span>
+      </button>
+    </section>
+
+    <!-- Sarcasm Mode Bar -->
+    <footer class="calc-footer">
+      <div class="mode-tag">
+        <span class="mode-dot"></span>
+        <span>Algorithm: <strong id="currentBias">Confidence Bias</strong></span>
+      </div>
+      <div class="calc-stats">
+        <span>Wrong Answers Served: <b id="wrongCounter">0</b></span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Floating Toast Notifications for Sarcastic Reactions -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
